@@ -44,7 +44,12 @@ def main(verbose=0):
     d = os.getcwd()
     print("\nWorking on directory: {}".format(d))
     
-    cpus = str(os.cpu_count())
+    # This may not work in Python <3.6.
+    try:
+        cpus = str(os.cpu_count())
+    
+    except AttributeError:
+        cpus = 1
     
     # Input and output checklists.
     inList  = []
@@ -59,11 +64,13 @@ def main(verbose=0):
             inList.append(f[:-3])
 
     # If outputs are missing, run them.
-    while inList != outList:
+    while (inList != outList):
+
+        # This is to avoid and infinite-loop execution.
+        if (len(outList) > len(inList)):
+            print("There are more outputs than inputs. Check files in the directory.")
+            break
     
-        #print(inList)  # Debug.
-        #print(outList) # Debug.
-        
         # Empty the checklists. This avoids an infinite loop if an
         # input is removed while the script is being executed.
         inList = []
