@@ -42,6 +42,8 @@ def main(verbose=0):
     start = time.time()
 
     d = os.getcwd()
+    print("\nWorking on directory: {}".format(d))
+    
     cpus = str(os.cpu_count())
     
     # Input and output checklists.
@@ -58,7 +60,7 @@ def main(verbose=0):
 
     # If outputs are missing, run them.
     while inList != outList:
-        
+    
         #print(inList)  # Debug.
         #print(outList) # Debug.
         
@@ -78,8 +80,10 @@ def main(verbose=0):
                 outf = "{}.out".format(f[:-3])
 
                 if not os.path.exists(outf):
-                    print("Executing command: {} {} {} {} {}".format("psi4", "-i", f, "-n", cpus))
+                    #print("Executing command: {} {} {} {} {}".format("psi4", "-i", f, "-n", cpus)) # Debug
+                    jobstart = time.time()
                     subprocess.run(["psi4", "-i", f, "-n", cpus])
+                    print("Execution of input {} terminated. Total elapsed wall-clock time: {:.2f} s".format(f, time.time() - jobstart))
 
         for f in os.listdir(d):
             
@@ -89,7 +93,8 @@ def main(verbose=0):
                 if not f in outList:
                     outList.append(f[:-4])
 
-    print("All inputs have name-matching outputs. Execution terminated.")
+    print("All inputs in the directory have name-matching outputs.")
+    print("\nExecution terminated. Total elapsed wall-clock time: {:.2f} s\n".format(time.time() - start))
 
 # ======================================================================
     
