@@ -1,0 +1,16 @@
+memory 500 MB
+
+molecule Water {
+  O            0.0000000       -0.1113511        0.0000000
+  H            0.0000000        0.4454045       -0.7830366
+  H            0.0000000        0.4454045        0.7830366
+}
+
+set {
+  scf_type df
+  freeze_core true
+}
+
+energy('scf/STO-3G')
+
+
