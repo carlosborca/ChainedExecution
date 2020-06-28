@@ -82,6 +82,7 @@ def main(verbose=0):
                 if not os.path.exists(outf):
                     #print("Executing command: {} {} {} {} {}".format("psi4", "-i", f, "-n", cpus)) # Debug
                     jobstart = time.time()
+                    #NOTE: Is PSI_SCRATCH properly setup? Need to see how to set it up from here.
                     subprocess.run(["psi4", "-i", f, "-n", cpus])
                     print("Execution of input {} terminated. Total elapsed wall-clock time: {:.2f} s".format(f, time.time() - jobstart))
 
