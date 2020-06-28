@@ -59,8 +59,8 @@ def main(verbose=0):
     # If outputs are missing, run them.
     while inList != outList:
         
-        print(inList)
-        print(outList)
+        #print(inList)  # Debug.
+        #print(outList) # Debug.
         
         # Empty the checklists. This avoids an infinite loop if an
         # input is removed while the script is being executed.
